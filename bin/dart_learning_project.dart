@@ -21,6 +21,7 @@ void main() async{
   //GetJSON();
 
  D();
+ Dreturn();
 }
 
  //void GetJSON() async{
@@ -52,4 +53,13 @@ var gender = user.gender;
   await db.execute ("INSERT INTO Names (count, gender, name, probability) VALUES($count, '$gender', '$name', $probability )");
   await db.close();
 }
+void Dreturn() async{
+  sqfliteFfiInit();
 
+  var databaseFactory = databaseFactoryFfi;
+  var db = await databaseFactory.openDatabase(
+      'E:/Програмування/Віжуал фігня/Курси/dart_attempt/dat.db');
+  var result = await db.query('Names');
+  print(result);
+  await db.close();
+}
