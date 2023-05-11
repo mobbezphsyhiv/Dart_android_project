@@ -20,8 +20,8 @@ class Person {
 void main() async{
   //GetJSON();
 
- D();
- Dreturn();
+  await D();
+  Dreturn();
 }
 
  //void GetJSON() async{
