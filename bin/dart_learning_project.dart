@@ -16,25 +16,25 @@ class Person {
         name = json['name'];
 
 
-
 }
 void main() async{
- GetJSON();
+  //GetJSON();
+
  D();
 }
 
- void GetJSON() async{
-  http.Response response = await http.get(Uri.parse('https://api.genderize.io?name=anya'));
-  Map<String, dynamic> persona = jsonDecode(response.body);
-  var user = Person.fromJson(persona);
-  print(user.probability);
-  print(user.gender);
-  print(user.name);
-  print(user.count);
+ //void GetJSON() async{
+  //http.Response response = await http.get(Uri.parse('https://api.genderize.io?name=anya'));
+ // Map<String, dynamic> persona = jsonDecode(response.body);
+  //var user = Person.fromJson(persona);
+  //print(user.probability);
+ // print(user.gender);
+ // print(user.name);
+ // print(user.count);
 
-}
+//}
 Future D() async {
-  // Init ffi loader if needed.
+
   sqfliteFfiInit();
 
   var databaseFactory = databaseFactoryFfi;
@@ -42,6 +42,14 @@ Future D() async {
       'E:/Програмування/Віжуал фігня/Курси/dart_attempt/dat.db');
   await db.execute(
       "CREATE TABLE IF NOT EXISTS Names (count INT, gender VARCHAR(20), name VARCHAR(20) PRIMARY KEY ON CONFLICT REPLACE, probability REAL)");
+http.Response response = await http.get(Uri.parse('https://api.genderize.io?name=sasha'));
+Map<String, dynamic> persona = jsonDecode(response.body);
+var user = Person.fromJson(persona);
+var name = user.name;
+var probability = user.probability;
+var count = user.count;
+var gender = user.gender;
+  await db.execute ("INSERT INTO Names (count, gender, name, probability) VALUES($count, '$gender', '$name', $probability )");
   await db.close();
 }
 
